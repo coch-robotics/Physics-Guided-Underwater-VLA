@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="A plug-and-play, physics-guided world model for cross-medium robotic manipulation under dynamic refraction.">
+  <meta name="keywords"
+        content="cross-medium manipulation, underwater robotics, world model, refraction, robot learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eye in the Air, Hand in the Water</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item home-link" href="#top" aria-label="Back to top">
+        <span class="icon"><i class="fas fa-home"></i></span>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#abstract">Overview</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#BibTeX">BibTeX</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero project-header" id="top">
+    <div class="hero-body">
+      <div class="container is-widescreen">
+        <div class="columns is-centered">
+          <div class="column is-11 has-text-centered">
+            <p class="eyebrow">Cross-Medium Robot Manipulation</p>
+            <h1 class="title publication-title">Eye in the Air, Hand in the Water</h1>
+            <p class="title publication-title publication-title-secondary">
+              A Plug-and-Play World Model with Analytic Priors
+            </p>
+            <p class="subtitle publication-subtitle">
+              Predicting refraction-free observations at action execution time for frozen
+              manipulation policies.
+            </p>
+
+            <div class="publication-authors">
+              <span class="author-block">Anonymous Authors</span>
+            </div>
+            <div class="publication-affiliation">Institution withheld during review</div>
+            <p class="publication-venue">Submitted to ICRA 2027</p>
+
+            <div class="publication-links">
+              <span class="link-block">
+                <span class="button is-normal is-rounded is-dark project-link is-disabled"
+                      aria-label="Paper link will be available after review">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </span>
+              </span>
+              <span class="link-block">
+                <span class="button is-normal is-rounded is-dark project-link is-disabled"
+                      aria-label="Code link will be available after review">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </span>
+              </span>
+              <span class="link-block">
+                <a href="#video" class="button is-normal is-rounded is-dark project-link">
+                  <span class="icon"><i class="fas fa-play"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser" id="video">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="media-frame media-frame-large">
+          <video class="project-video" id="teaser" autoplay muted loop playsinline controls
+                 poster="./static/images/real-world-demo-poster.png">
+            <source src="./static/videos/real-world-demo.mp4" type="video/mp4">
+          </video>
+          <div class="media-placeholder teaser-placeholder">
+            <span class="placeholder-kicker">Real-World Rollouts</span>
+            <div class="placeholder-flow" aria-hidden="true">
+              <div class="placeholder-stage stage-wet">
+                <i class="fas fa-water"></i>
+                <span>Wet RGB</span>
+              </div>
+              <i class="fas fa-long-arrow-alt-right flow-arrow"></i>
+              <div class="placeholder-stage stage-model">
+                <i class="fas fa-project-diagram"></i>
+                <span>World Model</span>
+              </div>
+              <i class="fas fa-long-arrow-alt-right flow-arrow"></i>
+              <div class="placeholder-stage stage-dry">
+                <i class="fas fa-eye"></i>
+                <span>Predicted Dry RGB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="subtitle has-text-centered teaser-caption">
+          Same robot. Same frozen policy. A predictive visual interface turns distorted wet
+          observations into refraction-free views for successful manipulation.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section overview-section" id="abstract">
+    <div class="container is-widescreen">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <div class="section-heading has-text-centered">
+            <p class="section-kicker">In One Sentence</p>
+            <h2 class="title is-2">A world model between perception and policy</h2>
+          </div>
+          <div class="content abstract-copy">
+            <p>
+              In cross-medium manipulation, cameras remain above water while robot tools operate
+              underwater. Robot-induced waves continually change refraction, making submerged
+              objects appear to move and causing policies trained on clear observations to fail.
+            </p>
+            <p>
+              Our plug-and-play world model combines analytic wave and refraction priors with
+              learned residual dynamics. It reconstructs the current scene, predicts dry RGB at
+              the scheduled start of action execution, and serves those observations to existing
+              visuomotor and vision-language-action policies without changing their weights.
+            </p>
+          </div>
+
+          <div class="contribution-grid">
+            <article class="contribution-item">
+              <span class="contribution-icon"><i class="fas fa-water"></i></span>
+              <h3>Physics-guided prediction</h3>
+              <p>Analytic wave and refraction priors guide learned latent dynamics.</p>
+            </article>
+            <article class="contribution-item">
+              <span class="contribution-icon"><i class="fas fa-clock"></i></span>
+              <h3>Target-time observations</h3>
+              <p>Predictions are aligned with when the next action chunk begins.</p>
+            </article>
+            <article class="contribution-item">
+              <span class="contribution-icon"><i class="fas fa-plug"></i></span>
+              <h3>Frozen-policy interface</h3>
+              <p>Only policy-facing RGB generators are adapted; policies stay frozen.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <figure class="paper-figure">
+        <img src="./static/images/project-overview.png"
+             alt="Overview comparing direct deployment under refraction with deployment through the plug-and-play world model"
+             loading="lazy" decoding="async">
+        <figcaption>
+          The same frozen policy fails on refracted observations and succeeds when supplied with
+          predicted refraction-free RGB from the world model.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section method-section" id="method">
+    <div class="container is-widescreen">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Method</p>
+        <h2 class="title is-2">From queued actions to policy-ready vision</h2>
+        <p class="section-lead">
+          The model anticipates how robot motion reshapes the water surface, then predicts the
+          observation the policy should see when its next action begins.
+        </p>
+      </div>
+
+      <figure class="method-figure">
+        <div class="figure-scroll">
+          <img src="./static/images/fig2-method.png"
+               alt="System diagram showing real-world data acquisition, action-to-wave simulation, latent prediction and correction, predicted dry RGB, and policy-specific adaptation"
+               loading="lazy" decoding="async">
+        </div>
+        <figcaption>
+          <strong>Figure 2.</strong> Real measurements calibrate the action-to-wave prior. The
+          world model combines wet observations, robot kinematics, analytic descriptors, and
+          cached forecasts to synthesize dry RGB aligned with scheduled action execution.
+        </figcaption>
+      </figure>
+
+      <div class="method-pipeline" aria-label="Method pipeline">
+        <div class="pipeline-stage">
+          <span class="pipeline-icon"><i class="fas fa-camera"></i></span>
+          <strong>Wet observations</strong>
+          <small>Top and wrist RGB</small>
+        </div>
+        <div class="pipeline-stage">
+          <span class="pipeline-icon"><i class="fas fa-water"></i></span>
+          <strong>Analytic prior</strong>
+          <small>Action-to-wave rollout</small>
+        </div>
+        <div class="pipeline-stage">
+          <span class="pipeline-icon"><i class="fas fa-project-diagram"></i></span>
+          <strong>World model</strong>
+          <small>Prediction and correction</small>
+        </div>
+        <div class="pipeline-stage">
+          <span class="pipeline-icon"><i class="fas fa-eye"></i></span>
+          <strong>Predicted dry RGB</strong>
+          <small>Aligned to target time</small>
+        </div>
+        <div class="pipeline-stage">
+          <span class="pipeline-icon"><i class="fas fa-robot"></i></span>
+          <strong>Frozen policy</strong>
+          <small>ACT, DP, &pi;<sub>0.5</sub>, SmolVLA</small>
+        </div>
+      </div>
+
+      <div class="method-details">
+        <article class="method-detail detail-prior">
+          <span class="method-number">01</span>
+          <h3>Action-to-Wave Prior</h3>
+          <p>
+            Forward kinematics and calibrated surface dynamics convert committed robot actions
+            into an analytic forecast of waves and refraction.
+          </p>
+        </article>
+        <article class="method-detail detail-prediction">
+          <span class="method-number">02</span>
+          <h3>Physics-Guided World Model</h3>
+          <p>
+            Wet RGB, robot state, analytic descriptors, and valid cached forecasts jointly update
+            the latent state and predict future dry views.
+          </p>
+        </article>
+        <article class="method-detail detail-interface">
+          <span class="method-number">03</span>
+          <h3>Policy Interface</h3>
+          <p>
+            View-specific RGB generators match each policy's observation format while the shared
+            dynamics core and downstream policy remain frozen.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section video-results-section" id="results">
+    <div class="container is-widescreen">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Qualitative Results</p>
+        <h2 class="title is-2">Simulation across policy backends</h2>
+        <p class="section-lead">
+          Simulation rollouts with ACT, Diffusion Policy, &pi;<sub>0.5</sub>, and SmolVLA across
+          grasping, placing, and stacking.
+        </p>
+      </div>
+
+      <div class="single-result-video">
+        <article class="media-card media-card-large">
+          <div class="media-frame">
+            <video class="project-video" autoplay controls muted loop playsinline
+                   poster="./static/images/simulation-demo-poster.png">
+              <source src="./static/videos/simulation-demo.mp4" type="video/mp4">
+            </video>
+            <div class="media-placeholder rollout-placeholder">
+              <span class="placeholder-kicker">Simulation Rollouts</span>
+              <span class="placeholder-title">Four Policy Backends</span>
+              <div class="rollout-tasks" aria-hidden="true">
+                <span>Grasping</span>
+                <span>Placing</span>
+                <span>Stacking</span>
+              </div>
+            </div>
+          </div>
+          <h3>Cross-medium manipulation in simulation</h3>
+          <p>
+            With-and-without world-model comparisons across four frozen policy backends and all
+            three tasks.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quantitative-section" aria-labelledby="quantitative-title">
+    <div class="container is-max-desktop">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Quantitative Results</p>
+        <h2 class="title is-2" id="quantitative-title">Closing the refraction gap</h2>
+      </div>
+
+      <div class="metric-highlights">
+        <div class="metric-highlight">
+          <strong>+53.3</strong>
+          <span>points over Raw Wet in simulation</span>
+        </div>
+        <div class="metric-highlight">
+          <strong>+52.1</strong>
+          <span>points over Raw Wet in the real world</span>
+        </div>
+        <div class="metric-highlight">
+          <strong>0.162 mm</strong>
+          <span>surface RMSE at a 0.5 s lead time</span>
+        </div>
+        <div class="metric-highlight">
+          <strong>+17.0</strong>
+          <span>points from predictive deployment</span>
+        </div>
+      </div>
+
+      <div class="comparison-grid">
+        <article class="comparison-panel">
+          <div class="comparison-heading">
+            <h3>Simulation</h3>
+            <span>Average task success (%)</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Raw Wet</span>
+            <div class="bar-track"><span class="bar-fill bar-raw" style="--bar-width: 20%;"></span></div>
+            <strong>20.0</strong>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Ours</span>
+            <div class="bar-track"><span class="bar-fill bar-ours" style="--bar-width: 73.3%;"></span></div>
+            <strong>73.3</strong>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Empty Tank</span>
+            <div class="bar-track"><span class="bar-fill bar-reference" style="--bar-width: 89.3%;"></span></div>
+            <strong>89.3</strong>
+          </div>
+        </article>
+
+        <article class="comparison-panel">
+          <div class="comparison-heading">
+            <h3>Real World</h3>
+            <span>Average task success (%)</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Raw Wet</span>
+            <div class="bar-track"><span class="bar-fill bar-raw" style="--bar-width: 7.9%;"></span></div>
+            <strong>7.9</strong>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Ours</span>
+            <div class="bar-track"><span class="bar-fill bar-ours" style="--bar-width: 60%;"></span></div>
+            <strong>60.0</strong>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Empty Tank</span>
+            <div class="bar-track"><span class="bar-fill bar-reference" style="--bar-width: 80.8%;"></span></div>
+            <strong>80.8</strong>
+          </div>
+        </article>
+      </div>
+
+      <p class="results-note">
+        Averages are computed across the tasks and policy backends reported in the paper. The
+        Empty Tank condition is a water-free reference rather than a guaranteed upper bound.
+      </p>
+
+      <div class="evaluation-scope">
+        <p><strong>Policies</strong> ACT, Diffusion Policy, &pi;<sub>0.5</sub>, SmolVLA</p>
+        <p><strong>Tasks</strong> Grasping, placing, stacking</p>
+        <p><strong>Domains</strong> Simulation and real world</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section citation-section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="section-heading">
+        <p class="section-kicker">Citation</p>
+        <h2 class="title is-2">BibTeX</h2>
+      </div>
+      <pre><code>@inproceedings{anonymous2027eye,
+  author    = {Anonymous Authors},
+  title     = {Eye in the Air, Hand in the Water: A Plug-and-Play World Model
+               with Analytic Priors for Cross-Medium Manipulation},
+  booktitle = {Submitted to the IEEE International Conference on Robotics
+               and Automation (ICRA)},
+  year      = {2027}
+}</code></pre>
+      <p class="citation-note">Author information and publication links will be updated after review.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+      <p>
+        This project page is adapted from the
+        <a href="https://github.com/nerfies/nerfies.github.io">Nerfies website template</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
