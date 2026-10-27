@@ -1,40 +1,23 @@
-# Eye in the Air, Hand in the Water
+# Physics-Guided Underwater VLA
 
-Project page for "Eye in the Air, Hand in the Water: A Plug-and-Play World
-Model with Analytic Priors for Cross-Medium Manipulation." The page is adapted
-from the Nerfies website template.
+**Eye in the Air, Hand in the Water**
 
-## Edit the page
+A plug-and-play world model for cross-medium robotic manipulation, where cameras observe from above water while robot tools operate underwater. The project addresses the changing visual distortion caused by waves and refraction, helping existing robot policies operate on submerged objects.
 
-- Main content: `index.html`
-- Custom styles: `static/css/index.css`
-- Custom scripts: `static/js/index.js`
-- Favicon: `static/images/favicon.svg`
-- Project overview figure: `static/images/project-overview.png`
-- Method figure (Fig. 2): `static/images/fig2-method.png`
+## Key Ideas
 
-## Add your videos
+- **Physics-guided prediction:** Combine analytic wave and refraction priors with learned residual dynamics.
+- **Action-aligned observations:** Predict refraction-free RGB views for the scheduled start of action execution.
+- **Frozen-policy integration:** Provide observations to ACT, Diffusion Policy, π0.5, and SmolVLA without updating their policy weights.
 
-No original Nerfies videos are included. Add your own MP4 files to `static/videos/`.
+## Demonstrations
 
-The current page expects:
+The project includes simulation and real-world evaluations of grasping, placing, and stacking.
 
-- `static/videos/teaser.mp4`: real-robot raw-wet failure versus world-model success
-- `static/videos/real-robot-rollout.mp4`: ACT and pi0.5 real-robot rollouts for
-  grasping, placing, and stacking
+- [Project website](https://coch-robotics.github.io/Physics-Guided-Underwater-VLA/)
+- [Real-world demonstration](static/videos/real-world-demo.mp4)
+- [Simulation demonstration](static/videos/simulation-demo.mp4)
 
-You can also rename the paths in `index.html` if your file names are different.
+---
 
-## Preview
-
-Open `index.html` directly in a browser, or run a local static server from this folder:
-
-```bash
-python3 -m http.server 8765
-```
-
-Then visit `http://127.0.0.1:8765/`.
-
-## Credit
-
-The original template comes from <https://github.com/nerfies/nerfies.github.io>.
+The project website is adapted from the [Nerfies template](https://github.com/nerfies/nerfies.github.io).
